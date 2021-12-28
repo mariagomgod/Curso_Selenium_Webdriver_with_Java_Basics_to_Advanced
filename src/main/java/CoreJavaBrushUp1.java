@@ -31,5 +31,9 @@ public class CoreJavaBrushUp1 {
         for(int i = 0; i < name.length; i++) {
             System.out.println(name[i]);
         }
+
+        for(String s: name) {
+            System.out.println(s);
+        }
     }
 }
