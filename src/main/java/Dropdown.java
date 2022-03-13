@@ -10,6 +10,5 @@ public class Dropdown {
         driver.findElement(By.xpath("//div[contains(text(),'BLR')]")).click();
         Thread.sleep(1000);
         driver.findElement(By.xpath("//div[contains(text(),'MAA')]")).click();
-
     }
 }
