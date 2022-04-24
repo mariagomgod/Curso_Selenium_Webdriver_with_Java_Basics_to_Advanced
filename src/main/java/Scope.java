@@ -4,9 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.Iterator;
+import java.util.Set;
+
 public class Scope {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.rahulshettyacademy.com/AutomationPractice/");
@@ -31,7 +34,18 @@ public class Scope {
             // Click on the links and open in separate tabs
             String clickOnLinkTab = Keys.chord(Keys.CONTROL, Keys.ENTER);
             columnDriver.findElements(By.tagName("a")).get(i).sendKeys(clickOnLinkTab);
+            Thread.sleep(5000L);
 
         }
+
+        // 5.- Getting the titles of child tabs with optimized while loop (open all the tabs).
+        Set<String> windows = driver.getWindowHandles();
+        Iterator<String> it = windows.iterator();
+
+        while(it.hasNext()) {
+            driver.switchTo().window(it.next());
+            System.out.println(driver.getTitle());
+        }
+
     }
 }
