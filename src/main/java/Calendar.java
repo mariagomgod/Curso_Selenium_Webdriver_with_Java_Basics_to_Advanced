@@ -13,15 +13,15 @@ public class Calendar {
         driver.get("https://www.path2usa.com/travel-companions");
         // August 23
         driver.findElement(By.xpath(".//*[@id='travel_date']")).click();
-        List<WebElement> dates = driver.findElements(By.className(".day"));
+        List<WebElement> dates = driver.findElements(By.className("day"));
 
-        int count = driver.findElements(By.className(".day")).size();
+        int count = driver.findElements(By.className("day")).size();
 
         for (int i = 0; i < count; i++) {
-            String text = driver.findElements(By.className(".day")).get(i).getText();
+            String text = driver.findElements(By.className("day")).get(i).getText();
 
             if (text.equalsIgnoreCase("23")) {
-                driver.findElements(By.className(".day")).get(i).click();
+                driver.findElements(By.className("day")).get(i).click();
                 break;
             }
         }
