@@ -28,7 +28,7 @@ public class Scope {
         // 4.- Click on each link in the column and check if the pages are opening.
         for (int i = 1; i < columnDriver.findElements(By.tagName("a")).size(); i++) {
 
-            // Click on the links and open new tabs
+            // Click on the links and open in separate tabs
             String clickOnLinkTab = Keys.chord(Keys.CONTROL, Keys.ENTER);
             columnDriver.findElements(By.tagName("a")).get(i).sendKeys(clickOnLinkTab);
 
