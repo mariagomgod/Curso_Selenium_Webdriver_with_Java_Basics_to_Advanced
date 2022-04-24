@@ -1,3 +1,4 @@
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -19,7 +20,7 @@ public class Base {
 
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        WebDriverWait w =new WebDriverWait(driver,5);
+        WebDriverWait w =new WebDriverWait(driver, Duration.ofMillis(5000));
 
 
         String[] itemsNeeded= {"Cucumber","Brocolli","Beetroot"};
