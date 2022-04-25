@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -27,5 +28,9 @@ public class JavascriptExecutorDemo {
         }
 
         System.out.println(sum);
+
+        int total = Integer.parseInt(driver.findElement(By.cssSelector(".totalAmount")).getText().split(":")[1].trim());
+
+        Assert.assertEquals(sum, total);
     }
 }
