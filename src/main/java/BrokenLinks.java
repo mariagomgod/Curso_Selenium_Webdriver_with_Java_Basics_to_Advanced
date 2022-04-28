@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -17,6 +18,7 @@ public class BrokenLinks {
         WebDriver driver = new ChromeDriver();
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         List<WebElement> links = driver.findElements(By.cssSelector("li[class='gf-li'] a"));
+        SoftAssert softAssert = new SoftAssert();
 
         for (WebElement link : links) {
             String url = link.getAttribute("href");
@@ -25,11 +27,10 @@ public class BrokenLinks {
             connection.connect();
             int responseCode = connection.getResponseCode();
             System.out.println(responseCode);
-            if (responseCode > 400) {
-                System.out.println("The link with the text " + link.getText() + " is broken with code " + responseCode);
-                Assert.assertTrue(false);
-            }
+            softAssert.assertTrue(responseCode < 400, "The link with the text " + link.getText() + " is broken with code " + responseCode);
         }
+
+        softAssert.assertAll();
 
         // Broken URL
         // 1.- To get all URL's tied up to the links
