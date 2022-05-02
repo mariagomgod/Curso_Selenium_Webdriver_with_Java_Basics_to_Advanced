@@ -1,5 +1,6 @@
 import org.junit.Test;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class Test1 {
 
@@ -38,7 +39,17 @@ public class Test1 {
         names.add("Aleisha");
         names.add("Tom");
 
-        names.stream().filter(s -> s.startsWith("A"));
+        Long c = names.stream().filter(s -> s.startsWith("A")).count();
+        System.out.println(c);
+
+        Long d = Stream.of("Adams", "Violet", "Alfred", "Aleisha", "Tom").filter(s -> {
+                s.startsWith("A");
+                return false;
+        }).count();
+        System.out.println(d);
+
+        // Print all the names in an Arraylist.
+        names.stream().filter(s -> s.length() > 4).forEach(s -> System.out.println(s));
     }
 
 }
