@@ -1,9 +1,11 @@
 import com.google.common.collect.Streams;
+import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Test1 {
@@ -73,7 +75,24 @@ public class Test1 {
                 .forEach(s -> System.out.println(s));
         // Merging 2 different lists
         Stream<String> newStream = Stream.concat(names.stream(), names1.stream());
-        newStream.sorted().forEach(s -> System.out.println(s));
+        //newStream.sorted().forEach(s -> System.out.println(s));
+        boolean flag = newStream.anyMatch(s -> s.equalsIgnoreCase("Adams"));
+        System.out.println(flag);
+        Assert.assertTrue(flag);
+    }
+
+    @Test
+    public void streamCollect() {
+
+        List<String> ls = Stream.of("Adams", "Violet", "Alfred", "Aleisha", "Tom").filter(s -> s.endsWith("a")).map(s -> s.toUpperCase())
+                .collect(Collectors.toList());
+        System.out.println(ls.get(0));
+
+        List<Integer> numbers = Arrays.asList(3, 2, 2, 7, 5, 1, 9, 7);
+        // Print unique number of this array and sort the array- 3rd index
+        //numbers.stream().distinct().forEach(s -> System.out.println(s));
+        List<Integer> li = numbers.stream().distinct().sorted().collect(Collectors.toList());
+        System.out.println(li.get(2));
     }
 
 }
