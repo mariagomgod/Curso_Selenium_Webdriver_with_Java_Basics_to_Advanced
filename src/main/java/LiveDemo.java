@@ -28,5 +28,16 @@ public class LiveDemo {
 
         // Compare the original list vs the sorted list
         Assert.assertTrue(originalList.equals(sortedList));
+
+        // Scan the name column with getText -> Beans -> Print the price of the beans
+        List<String> priceOfBeans = elementsList.stream().filter(s -> s.getText().contains("Beans"))
+                .map(s -> getPriceVeggie(s)).collect(Collectors.toList());
+        priceOfBeans.forEach(a -> System.out.println(a));
+
+    }
+
+    private static String getPriceVeggie(WebElement s) {
+        String priceValue = s.findElement(By.xpath("following-sibling::td[1]")).getText();
+        return priceValue;
     }
 }
