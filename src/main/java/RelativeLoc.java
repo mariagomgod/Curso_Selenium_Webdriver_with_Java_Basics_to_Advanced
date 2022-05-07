@@ -13,6 +13,8 @@ public class RelativeLoc {
         driver.get("https://rahulshettyacademy.com/angularpractice/");
         WebElement nameEditBox = driver.findElement(By.cssSelector("[name='name']"));
         System.out.println(driver.findElement(with(By.tagName("label")).above(nameEditBox)).getText());
+        WebElement nameDateOfBirth = driver.findElement(By.cssSelector("[for='dateofBirth']"));
+        driver.findElement(with(By.tagName("input")).below(nameDateOfBirth)).click();
 
     }
 }
