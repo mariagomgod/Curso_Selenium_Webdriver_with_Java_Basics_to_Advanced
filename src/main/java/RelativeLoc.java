@@ -17,6 +17,8 @@ public class RelativeLoc {
         driver.findElement(with(By.tagName("input")).below(nameDateOfBirth)).click();
         WebElement iceCreamLabel = driver.findElement(By.xpath("//label[contains(.,'Check me out if you Love IceCreams!')]"));
         driver.findElement(with(By.tagName("input")).toLeftOf(iceCreamLabel)).click();
+        WebElement rdb = driver.findElement(By.id("inlineRadio1"));
+        System.out.println(driver.findElement(with(By.tagName("label")).toRightOf(rdb)).getText());
 
     }
 }
