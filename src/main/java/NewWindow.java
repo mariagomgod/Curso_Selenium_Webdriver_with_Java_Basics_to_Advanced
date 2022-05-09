@@ -5,11 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class NewWindow {
 
@@ -17,6 +22,8 @@ public class NewWindow {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://rahulshettyacademy.com/angularpractice/");
+
+        // Switching window
         driver.switchTo().newWindow(WindowType.TAB);
         Set<String> handles = driver.getWindowHandles();
         Iterator<String> it = handles.iterator();
@@ -24,13 +31,23 @@ public class NewWindow {
         String childWindow = it.next();
         driver.switchTo().window(childWindow);
         driver.get("https://rahulshettyacademy.com/");
-        String courseName = driver.findElements(By.cssSelector("a[href*='https://courses.rahulshettyacademy.com/p']"))
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        By coursesSelector = By.cssSelector("a[href*='https://courses.rahulshettyacademy.com/p']");
+        wait.until(visibilityOfElementLocated(coursesSelector));
+        String courseName = driver.findElements(coursesSelector)
                 .get(1).getText();
         driver.switchTo().window(parentWindowId);
         WebElement name = driver.findElement(By.cssSelector("[name='name']"));
         name.sendKeys(courseName);
+
+        //Screenshot
         File file = name.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(file, new File("logo.png"));
         //driver.quit();
+
+        // Get height and width
+        System.out.println(name.getRect().getDimension().getHeight());
+        System.out.println(name.getRect().getDimension().getWidth());
+
     }
 }
